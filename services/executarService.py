@@ -56,18 +56,15 @@ class DiagnosticoIA:
         LIMITE_DE_CONFIANCA = 0.35
         
         if maior_certeza < LIMITE_DE_CONFIANCA:
-             return [f"Inconclusivo (Certeza baixa: {maior_certeza*100:.1f}%). Detalhe mais os sintomas."]
-        
+            # Retorna uma lista com 2 itens: [Titulo, Detalhe]
+            return ["Inconclusivo", f"Certeza baixa: {maior_certeza*100:.1f}%"]
+
         else:
-            # Pegamos o nome cru: "sindrome_fadiga_cronica"
             nome_cru = nome_diagnostico[0]
-            
-            # TRATAMENTO DE BELEZA:
-            # 1. Tira os underlines (_) e troca por espaço
-            # 2. Deixa a primeira letra de cada palavra Maiúscula (.title())
             nome_bonito = nome_cru.replace("_", " ").title()
-            
-            # Formata para mostrar a porcentagem
-            resultado_final = f"\n{nome_bonito}\n(Probabilidade: {maior_certeza*100:.1f}%)"
-            
-            return [resultado_final]
+    
+            # AQUI ESTÁ A MÁGICA:
+            # Item 0 (Doença): "Gripe"
+            # Item 1 (Probabilidade): "64,3%" (Formatado bonito)
+            return [nome_bonito, f"{maior_certeza*100:.1f}%"]
+        
